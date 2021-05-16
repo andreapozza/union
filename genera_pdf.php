@@ -182,21 +182,4 @@ $pdf->Write(10, $log);
 $pdf->Output('I', 'Rapporto di Manutenzione.pdf');
 
 
-
-
-
-
-
-
-
-
-
-
-
-function chopWord($pdf, $word, $width) {
-    while(ceil($pdf->GetStringWidth($word)) >= $width) {
-        $word = substr($word, 0, -1);
-    }
-    return $word;
-}
 ?>
