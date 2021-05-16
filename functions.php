@@ -35,3 +35,9 @@ function setData($table, $array_assoc) {
 
     return $result = $conn->query("INSERT INTO `$table` ($keys) VALUES ($values)") or die($conn->error);
 }
+
+function delData($table, $where) {
+    require 'db_connect.php';
+
+    return $result = $conn->query("DELETE FROM `$table` WHERE $where") or die($conn->error);
+}

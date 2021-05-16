@@ -3,6 +3,9 @@ require_once 'functions.php';
 
 
 $request = $_GET['q'];
+$tables = 'dipendenti|macchinari';
+$api_regex = "/($tables)\/*$/";
+$api_regex_id = "/($tables)\/(\d+)$/";
 
 switch ($request) {
     case '/' :
@@ -13,22 +16,34 @@ switch ($request) {
         require 'db_connect.php';
         require __DIR__ . '/views/admin.php';
         break;
-    case 'dipendenti':
-    case 'dipendenti/':
+    /* tables */
+    case (preg_match($api_regex, $request) ? true : false ):
+        $table = preg_replace($api_regex, '$1', $request);
         if(isset($_POST['nome']) && !empty($_POST['nome'])){
-            $result = setData('dipendenti', ['nome' => $_POST['nome'] ]);
-            if($result) {
-                $row = getData('dipendenti', '*', '1 ORDER BY id DESC LIMIT 1');
+            if($result = setData($table, ['nome' => $_POST['nome'] ])) {
+                $row = getData($table, '*', '1 ORDER BY id DESC LIMIT 1');
                 echo json_encode($row, JSON_PRETTY_PRINT);
+                break;
             }
-            break;
+        }
+        if(isset($_POST['delete']) && !empty($_POST['delete'])) {
+            delData($table, 1);
         }
         $list = getData('dipendenti');
         echo json_encode($list, JSON_PRETTY_PRINT);
         break;
-    case (preg_match('/dipendenti\/(\d+)/', $request) ? true : false ) :
-        $id = preg_replace('/dipendenti\/(\d+)/', '$1', $request);
-        $row = getData('dipendenti', '*', "id=$id");
+    /* ids */
+    case (preg_match($api_regex_id, $request) ? true : false ) :
+        $table = preg_replace($api_regex_id, '$1', $request);
+        $id = preg_replace($api_regex_id, '$2', $request);
+        if($_POST['delete'] && !empty($_POST['delete'])) {
+            delData($table, "id=$id");
+            $list = getData($table);
+            echo json_encode($list, JSON_PRETTY_PRINT);
+            break;
+        }
+
+        $row = getData($table, '*', "id=$id");
         echo json_encode($row, JSON_PRETTY_PRINT);
         break;
     default:
