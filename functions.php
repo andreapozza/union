@@ -8,10 +8,13 @@ function getData($table, $fields = '*', $where = '1') {
     }
     $result = $conn->query("SELECT $fields FROM `$table` WHERE $where") or die ($conn->error);
 
-    $multi_fields = preg_match('/,/', $fields) || $fields == '*';
-    while($row = $multi_fields ? $result->fetch_assoc() : $result->fetch_row() ){
-        $list[] = $multi_fields ? $row : $row[0];
+    if($result->num_rows == 0) return [];
+
+    $field_count = $result->field_count;
+    while($row = $field_count > 1 ? $result->fetch_assoc() : $result->fetch_row() ){
+        $list[] = $field_count > 1 ? $row : $row[0];
     }
+
 
     return count($list) > 1 ? $list : $list[0];
 }
