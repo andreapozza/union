@@ -29,7 +29,7 @@ switch ($request) {
         if(isset($_POST['delete']) && !empty($_POST['delete'])) {
             delData($table, 1);
         }
-        $list = getData('dipendenti');
+        $list = getData($table);
         echo json_encode($list, JSON_PRETTY_PRINT);
         break;
     /* ids */
@@ -46,7 +46,7 @@ switch ($request) {
         $row = getData($table, '*', "id=$id");
         echo json_encode($row, JSON_PRETTY_PRINT);
         break;
-    case 'pdf': 
+    case 'pdf':
         require_once __DIR__ . '/genera_pdf.php';
         break;
     default:
