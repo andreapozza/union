@@ -272,7 +272,7 @@
 
 
         function nomiPlus() {
-            document.getElementById('nomi-inputs').innerHTML += `
+            document.getElementById('nomi-inputs').insertAdjacentHTML('beforeend', `
                 <div class="justify-content-between mb-1 no-gutters row">
                     <div class="col-10">
                         <input type="text" name="nomi[]" class="form-control nomi" list="nomi">
@@ -280,7 +280,7 @@
                     <div class="col-1">
                         <div class="btn btn-danger" style="width: 35.34px" onclick="this.closest('.row').remove()">-</div>
                     </div>
-                </div>`;
+                </div>`)
         }
 
         // data
