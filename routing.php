@@ -47,6 +47,18 @@ switch ($request) {
         echo json_encode($row, JSON_PRETTY_PRINT);
         break;
     case 'pdf':
+        $campi_obbligatori = ["luogo", "nomi", "data", "macchinario", "componente", "causa-guasto", "tipo-intervento", "soluzione-adottata", "tempo-intervento", "straordinari", "verifiche"];
+        $condizione = true;
+        foreach($campi_obbligatori as $item) {
+            if(!isset($_POST[$item]) || empty($_POST[$item])){
+                $condizione = false;
+                break;
+            } 
+        }
+        if(!$condizione) {
+            header('Location: ./list', true);
+            die;
+        }
         require_once __DIR__ . '/genera_pdf.php';
         break;
     case 'list':
