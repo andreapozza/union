@@ -50,9 +50,7 @@
 </head>
 
 <body>
-    <div class="w-100 vh-100 position-fixed overflow-auto"
-        style="background: url(https://divisare-res.cloudinary.com/images/c_limit,f_auto,h_2000,q_auto,w_3000/v1/project_images/5158077/0904_Edificio_industriale_UNION_Masserano_Biella_23/daniela-saviola-michele-reginaldi-corrado-annoni-quattroassociati-union-industries.jpg) center/cover;">
-        <div class="container mt-5 py-5 px-3 bg-light-1 rounded-lg">
+        <div class="container my-5 py-5 px-3 bg-light-1 rounded-lg">
             <form action="pdf" method="POST" class="position-relative" target="_blank">
                 <div class="row justify-content-between">
                     <div class="col-12 col-sm-5 pb-5">
