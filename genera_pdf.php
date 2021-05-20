@@ -201,8 +201,14 @@ $pdf->Cell(0, 5, 'MER/RM;05-11-96;03;18-04-2017;P14');
 
 
 
+$nome_file = "docs" . DIRECTORY_SEPARATOR . date('YmdHis') . "-". $_POST['luogo'] . "-" . $_POST['nomi'][0] . ".pdf";
+$pdf->Output('F', $nome_file);
 
-$pdf->Output('I', 'Rapporto di Manutenzione.pdf');
+if(file_exists($nome_file)) {
+    header("Content-type: application/pdf");
+    header("Content-Disposition: inline; filename=filename.pdf");
+    @readfile($nome_file);
+}
 
 
 ?>
