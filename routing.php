@@ -49,6 +49,11 @@ switch ($request) {
     case 'pdf':
         require_once __DIR__ . '/genera_pdf.php';
         break;
+    case 'list':
+        $files = scandir(__DIR__ . '/docs', SCANDIR_SORT_DESCENDING);
+        $files = array_filter($files, function($f) {return !in_array($f, ['.', '..']);});
+        require_once __DIR__ . '/views/list.php';
+        break;
     default:
         http_response_code(404);
         require __DIR__ . '/views/404.php';

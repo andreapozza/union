@@ -28,6 +28,7 @@
 </head>
 
 <body>
+    <? include_once __DIR__.'/components/navbar.php'; ?>
     <div class="bg-union w-100 vh-100 position-fixed overflow-auto">
         <div class="container my-5 py-5 px-3 bg-light-1 rounded-lg">
             <form action="pdf" method="POST" class="position-relative" target="_blank">
