@@ -11,6 +11,7 @@
         crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
     <!-- <script>
     setInterval(() => {
         fetch(window.location)
@@ -24,32 +25,10 @@
     }, 1000)
     </script> -->
 
-    <style>
-    .bg-light-1 {
-        background-color: #ffffffd1 !important;
-    }
-
-    body>div.position-fixed:before {
-        content: '';
-        width: 100%;
-        height: 100%;
-        background-color: black;
-        opacity: .7;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
-
-    textarea.disabled {
-        background-color: #ddd;
-        pointer-events: none;
-    }
-    </style>
-
 </head>
 
 <body>
+    <div class="bg-union w-100 vh-100 position-fixed overflow-auto">
         <div class="container my-5 py-5 px-3 bg-light-1 rounded-lg">
             <form action="pdf" method="POST" class="position-relative" target="_blank">
                 <div class="row justify-content-between">

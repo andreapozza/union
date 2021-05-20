@@ -1,3 +1,28 @@
 body {
     background-color: #e4f2ff;
 }
+
+.bg-light-1 {
+    background-color: #ffffffd1 !important;
+}
+
+.bg-union {
+    background: url(https://divisare-res.cloudinary.com/images/c_limit,f_auto,h_2000,q_auto,w_3000/v1/project_images/5158077/0904_Edificio_industriale_UNION_Masserano_Biella_23/daniela-saviola-michele-reginaldi-corrado-annoni-quattroassociati-union-industries.jpg) center/cover;
+}
+
+.bg-union:before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: .7;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+textarea.disabled {
+    background-color: #ddd;
+    pointer-events: none;
+}
