@@ -3,7 +3,7 @@ require_once 'functions.php';
 
 
 $request = $_GET['q'];
-$tables = 'dipendenti|macchinari';
+$tables = 'cause_guasto|componenti|dipendenti|esterni|macchinari|settori|soluzioni_adottabili|tipi_intervento';
 $api_regex = "/($tables)\/*$/";
 $api_regex_id = "/($tables)\/(\d+)$/";
 
@@ -36,11 +36,15 @@ switch ($request) {
     case (preg_match($api_regex_id, $request) ? true : false ) :
         $table = preg_replace($api_regex_id, '$1', $request);
         $id = preg_replace($api_regex_id, '$2', $request);
-        if($_POST['delete'] && !empty($_POST['delete'])) {
+        if(isset($_POST['delete']) && !empty($_POST['delete'])) {
             delData($table, "id=$id");
             $list = getData($table);
             echo json_encode($list, JSON_PRETTY_PRINT);
             break;
+        }
+
+        if(isset($_POST['nome']) && !empty($_POST['nome'])){
+            setData($table, ['nome' => $_POST['nome'] ], "id=$id" );
         }
 
         $row = getData($table, '*', "id=$id");

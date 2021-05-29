@@ -22,18 +22,33 @@ function getData($table, $fields = '*', $where = '1') {
 
 
 
-function setData($table, $array_assoc) {
+function setData($table, $array_assoc, $where = null) {
     require 'db_connect.php';
 
-    foreach ($array_assoc as $key => $value) {
-        $keys[] = $key;
-        $values[] = is_string($value) ? "'".addslashes($value)."'" : $value;
+    if(!isset($where)) {
+        //  INSERT
+        foreach ($array_assoc as $key => $value) {
+            $keys[] = $key;
+            $values[] = is_string($value) ? "'".addslashes($value)."'" : $value;
+        }
+    
+        $keys = implode(', ', $keys);
+        $values = implode(', ', $values);
+    
+        return $result = $conn->query("INSERT INTO `$table` ($keys) VALUES ($values)") or die($conn->error);
     }
 
-    $keys = implode(', ', $keys);
-    $values = implode(', ', $values);
+    // UPDATE
+    $what = [];
+    foreach($array_assoc as $key => $value){ 
+        $what[] = $key . "=" . (is_string($value) ? "'".addslashes($value)."'" : $value);
+    }
 
-    return $result = $conn->query("INSERT INTO `$table` ($keys) VALUES ($values)") or die($conn->error);
+    $what = implode(", ", $what);
+
+    return $result = $conn->query("UPDATE `$table` SET $what WHERE $where") or die($conn->error);
+
+
 }
 
 function delData($table, $where) {
