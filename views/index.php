@@ -223,27 +223,29 @@
     </script>
     <script>
 
-        fetch('dipendenti').then(response=>response.json()).then(data=>{
-            var list = []
-            try {
-                list = [...data]
-            } catch (error) {
-                list.push(data)
-            }
-            list.forEach(element => {
-                document.getElementById('nomi').innerHTML += `<option value="${element.nome}">`
-            });
-        })
-        fetch('macchinari').then(response=>response.json()).then(data=>{
-            var list = []
-            try {
-                list = [...data]
-            } catch (error) {
-                list.push(data)
-            }
-            list.forEach(element => {
-                document.getElementById('macchinari').innerHTML += `<option value="${element.nome}">`
-            });
+        [
+            {tableName: 'settori', datalistId: 'luoghi'},
+            {tableName: 'dipendenti', datalistId: 'nomi'},
+            {tableName: 'esterni', datalistId: 'nomi'},
+            {tableName: 'macchinari', datalistId: 'macchinari'},
+            {tableName: 'componenti', datalistId: 'componenti'},
+            {tableName: 'cause_guasto', datalistId: 'cause-guasto'},
+            {tableName: 'tipi_intervento', datalistId: 'tipi-intervento'},
+            {tableName: 'soluzioni_adottabili', datalistId: 'soluzioni-adottabili'}
+
+        ].forEach(el => {
+            fetch(el.tableName).then(response=>response.json()).then(data=>{
+                console.log(data)
+                var list = []
+                try {
+                    list = [...data]
+                } catch (error) {
+                    list.push(data)
+                }
+                list.forEach(element => {
+                    document.getElementById(el.datalistId).innerHTML += `<option value="${element.nome}">`
+                });
+            })
         })
 
 
