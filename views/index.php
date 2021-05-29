@@ -135,14 +135,14 @@
                                     <label for="data">Tempo d'intervento</label>
                                     <div class="d-flex flex-nowrap justify-content-around align-items-center mb-3">
                                         <div>
-                                            <div class="btn btn-danger" onclick="tempoMeno('tempo-intervento')" style="width: 35.34px">-</div>
+                                            <div class="btn btn-danger" onmousedown="handleMouseDown(() => tempoMeno('tempo-intervento'))" onclick="tempoMeno('tempo-intervento')" style="width: 35.34px">-</div>
                                         </div>
                                         <div>
                                             <input type="hidden" value="00:30" name="tempo-intervento" id="tempo-intervento">
                                             <span>00:30</span>
                                         </div>
                                         <div>
-                                            <div class="btn btn-info" onclick="tempoPiu('tempo-intervento')">+</div>
+                                            <div class="btn btn-info" onmousedown="handleMouseDown(() => tempoPiu('tempo-intervento'))" onclick="tempoPiu('tempo-intervento')">+</div>
                                         </div>
                                     </div>
                                     <input type="date" class="form-control" id="data" name="data">
@@ -155,14 +155,14 @@
                                 <label>Straordinari</label>
                                 <div class="d-flex flex-nowrap justify-content-around align-items-center mb-3">
                                     <div>
-                                        <div class="btn btn-danger" onclick="tempoMeno('straordinari')" style="width: 35.34px">-</div>
+                                        <div class="btn btn-danger" onmousedown="handleMouseDown(() => tempoMeno('straordinari'))" onclick="tempoMeno('straordinari')" style="width: 35.34px">-</div>
                                     </div>
                                     <div>
                                         <input type="hidden" value="00:00" name="straordinari" id="straordinari">
                                         <span>00:00</span>
                                     </div>
                                     <div>
-                                        <div class="btn btn-info" onclick="tempoPiu('straordinari')">+</div>
+                                        <div class="btn btn-info" onmousedown="handleMouseDown(() => tempoPiu('straordinari'))" onclick="tempoPiu('straordinari')">+</div>
                                     </div>
                                 </div>
 
@@ -266,6 +266,13 @@
         var input_data =document.getElementById('data')
         input_data.value = oggi;
         input_data.max = oggi;
+
+        function handleMouseDown(callback) {
+            var md = setInterval(() => {
+                callback()
+            }, 300);
+            window.addEventListener('mouseup', () => clearInterval(md))
+        }
 
         function tempoPiu(id) {
             var Time = new GetTime(id)
