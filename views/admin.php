@@ -54,7 +54,7 @@
           </ul>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
           <button onclick="salva()" type="button" class="btn btn-success">Salva</button>
         </div>
       </div>
