@@ -51,7 +51,7 @@ function setData($table, $array_assoc, $where = null) {
 
 }
 
-function delData($table, $where) {
+function delData($table, $where = 1) {
     require 'db_connect.php';
 
     return $result = $conn->query("DELETE FROM `$table` WHERE $where") or die($conn->error);
