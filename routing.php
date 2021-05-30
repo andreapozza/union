@@ -14,7 +14,6 @@ switch ($request) {
         require __DIR__ . '/views/index.php';
         break;
     case 'admin' :
-        require 'db_connect.php';
         require __DIR__ . '/views/admin.php';
         break;
     /* tables */
