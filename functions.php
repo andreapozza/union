@@ -22,9 +22,6 @@ function getData($table, $fields = '*', $where = '1', $limit = 0, $offset = 0) {
     return $limit != 1 ? $list : $list[0];
 }
 
-
-
-
 function setData($table, $array_assoc, $where = null) {
     require 'db_connect.php';
 
@@ -32,7 +29,7 @@ function setData($table, $array_assoc, $where = null) {
         //  INSERT
         foreach ($array_assoc as $key => $value) {
             $keys[] = $key;
-            $values[] = is_string($value) ? "'".addslashes($value)."'" : $value;
+            $values[] = mySQLValueFilter($value);
         }
     
         $keys = implode(', ', $keys);
@@ -44,7 +41,7 @@ function setData($table, $array_assoc, $where = null) {
     // UPDATE
     $what = [];
     foreach($array_assoc as $key => $value){ 
-        $what[] = $key . "=" . (is_string($value) ? "'".addslashes($value)."'" : $value);
+        $what[] = $key . "=" . mySQLValueFilter($value);
     }
 
     $what = implode(", ", $what);
@@ -58,4 +55,8 @@ function delData($table, $where) {
     require 'db_connect.php';
 
     return $result = $conn->query("DELETE FROM `$table` WHERE $where") or die($conn->error);
+}
+
+function mySQLValueFilter($value) {
+    return is_string($value) ? "'".addslashes($value)."'" : $value;
 }
