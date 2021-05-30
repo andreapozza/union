@@ -47,7 +47,7 @@ switch ($request) {
             setData($table, ['nome' => $_POST['nome'] ], "id=$id" );
         }
 
-        $row = getData($table, '*', "id=$id");
+        $row = getData($table, '*', "id=$id", 1);
         echo json_encode($row, JSON_PRETTY_PRINT);
         break;
     case 'pdf':

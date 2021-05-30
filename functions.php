@@ -1,12 +1,15 @@
 <?php
 
 
-function getData($table, $fields = '*', $where = '1') {
+function getData($table, $fields = '*', $where = '1', $limit = 0, $offset = 0) {
     require 'db_connect.php';
     if(is_array($fields)) {
         $fields = implode(', ', $fields);
     }
-    $result = $conn->query("SELECT $fields FROM `$table` WHERE $where") or die ($conn->error);
+
+    $limit_condition = $limit > 0 ? "LIMIT $offset, $limit" : "";
+
+    $result = $conn->query("SELECT $fields FROM `$table` WHERE $where $limit_condition") or die ($conn->error);
 
     if($result->num_rows == 0) return [];
 
@@ -16,7 +19,7 @@ function getData($table, $fields = '*', $where = '1') {
     }
 
 
-    return count($list) > 1 ? $list : $list[0];
+    return $limit != 1 ? $list : $list[0];
 }
 
 
