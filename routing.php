@@ -1,11 +1,12 @@
 <?php
-require_once 'functions.php';
-
+require 'db.php';
 
 $request = $_GET['q'];
 $tables = 'cause_guasto|componenti|dipendenti|esterni|macchinari|settori|soluzioni_adottabili|tipi_intervento';
 $api_regex = "/($tables)\/*$/";
 $api_regex_id = "/($tables)\/(\d+)$/";
+
+$db = new DB;
 
 switch ($request) {
     case '/' :
@@ -20,16 +21,16 @@ switch ($request) {
     case (preg_match($api_regex, $request) ? true : false ):
         $table = preg_replace($api_regex, '$1', $request);
         if(isset($_POST['nome']) && !empty($_POST['nome'])){
-            if($result = setData($table, ['nome' => $_POST['nome'] ])) {
-                $row = getData($table, '*', '1 ORDER BY id DESC LIMIT 1');
+            if($result = $db->setData($table, ['nome' => $_POST['nome'] ])) {
+                $row = $db->getData($table, '*', '1 ORDER BY id DESC', 1);
                 echo json_encode($row, JSON_PRETTY_PRINT);
                 break;
             }
         }
         if(isset($_POST['delete']) && !empty($_POST['delete'])) {
-            delData($table, 1);
+            $db->delData($table, 1);
         }
-        $list = getData($table);
+        $list = $db->getData($table);
         echo json_encode($list, JSON_PRETTY_PRINT);
         break;
     /* ids */
@@ -37,17 +38,17 @@ switch ($request) {
         $table = preg_replace($api_regex_id, '$1', $request);
         $id = preg_replace($api_regex_id, '$2', $request);
         if(isset($_POST['delete']) && !empty($_POST['delete'])) {
-            delData($table, "id=$id");
-            $list = getData($table);
+            $db->delData($table, "id=$id");
+            $list = $db->getData($table);
             echo json_encode($list, JSON_PRETTY_PRINT);
             break;
         }
 
         if(isset($_POST['nome']) && !empty($_POST['nome'])){
-            setData($table, ['nome' => $_POST['nome'] ], "id=$id" );
+            $db->setData($table, ['nome' => $_POST['nome'] ], "id=$id" );
         }
 
-        $row = getData($table, '*', "id=$id", 1);
+        $row = $db->getData($table, '*', "id=$id", 1);
         echo json_encode($row, JSON_PRETTY_PRINT);
         break;
     case 'pdf':
