@@ -11,7 +11,7 @@ class DB  extends Connection{
         $limit_condition = $limit > 0 ? "LIMIT $limit" : "";
     
         $sql = "SELECT $fields FROM `$table` WHERE $where $limit_condition";
-        $result = $this->connection->query($sql) or die ($conn->error."\n".$sql);
+        $result = $this->connection->query($sql) or die ($this->connection->error."\n".$sql);
     
         if($result->num_rows == 0) return [];
     
@@ -37,7 +37,7 @@ class DB  extends Connection{
             $values = implode(', ', $values);
 
             $sql = "INSERT INTO `$table` ($keys) VALUES ($values)";
-            return $result = $this->connection->query($sql) or die($conn->error . "\n" . $sql);
+            return $result = $this->connection->query($sql) or die($this->connection->error . "\n" . $sql);
         }
     
         // UPDATE
@@ -49,7 +49,7 @@ class DB  extends Connection{
         $what = implode(", ", $what);
     
         $sql = "UPDATE `$table` SET $what WHERE $where";
-        return $result = $this->connection->query($sql) or die($conn->error . "\n" . $sql);
+        return $result = $this->connection->query($sql) or die($this->connection->error . "\n" . $sql);
     
     
     }
@@ -57,7 +57,7 @@ class DB  extends Connection{
     function delData($table, $where = 1) {
     
         $sql = "DELETE FROM `$table` WHERE $where";
-        return $result = $this->connection->query($sql) or die($conn->error . "\n" . $sql);
+        return $result = $this->connection->query($sql) or die($this->connection->error . "\n" . $sql);
     }
     
     function mySQLValueFilter($value) {
