@@ -112,7 +112,7 @@
         
         $.post(table+"/"+input.data('id'), data)
       }
-      else {
+      else if(!input.data('id')) {
         // aggiungi
         $.post(table, {nome: input.val()})
       }
