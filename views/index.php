@@ -328,7 +328,8 @@
         function toggleIsravisionAutocomplete(checked) {
             var data = new Date(document.getElementById('data').value)
             data.setMonth(data.getMonth()+1)
-            data = addZeros(''+data.getDate()) + '/' + addZeros(''+(data.getMonth()+1)) + '/' + data.getFullYear()
+            let [anno, mese, giorno] = data.toISOString().match(/\d+/g)
+            data = `${giorno}/${mese}/${anno}`
             var textarea = document.querySelector('textarea')
             textarea.classList.toggle('disabled', checked)
             var testo = "\n"+ `1) Pulizia vetri barra illuminazione e pulizia vetri vano telecamere (esterna ed interna) - mensile`
