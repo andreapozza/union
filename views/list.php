@@ -23,7 +23,7 @@
             foreach($files as $file) { ?>
                 <li class="list-group-item list-group-item-action">
                     <div class="row">
-                        <div class="col-auto"><a class="text-secondary" href="docs/<?=$file?>" target="_blank" rel="noopener noreferrer"><i title="Visualizza" class="fas fa-file-pdf text-danger"></i>  <?=$file?></a></div>
+                        <div class="col-10 col-sm-auto overflow-auto text-nowrap"><a class="text-secondary" href="docs/<?=$file?>" target="_blank" rel="noopener noreferrer"><i title="Visualizza" class="fas fa-file-pdf text-danger"></i>  <?=$file?></a></div>
                         <div class="col"><a href="docs/<?=$file?>" target="_blank" download rel="noopener noreferrer"><i title="Scarica" class="fas fa-download"></i></a></div>
                     </div>
                     
