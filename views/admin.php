@@ -71,7 +71,7 @@
     var scritta = button.prev('.card-title').text()
     var modal = $(this)
     var ul = modal.find('ul.list-group')
-    $.get(table)
+    $.get(table, {ob: 'nome'})
     .done(data => {
       setTimeout(() => {
         $('#modal .spinner-border').hide()

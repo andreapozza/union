@@ -6,6 +6,10 @@ $tables = 'cause_guasto|componenti|dipendenti|esterni|macchinari|settori|soluzio
 $api_regex = "/($tables)\/*$/";
 $api_regex_id = "/($tables)\/(\d+)$/";
 
+$fields = isset($_REQUEST['f']) ?  urldecode($_REQUEST['f']) : "*";
+$where = isset($_REQUEST['w']) ?  urldecode($_REQUEST['w']) : "1";
+$order_by = isset($_REQUEST['ob']) ? 'ORDER BY ' . urldecode($_REQUEST['ob']) : "";
+
 $db = new DB;
 
 switch ($request) {
@@ -29,7 +33,7 @@ switch ($request) {
         if(isset($_POST['delete']) && !empty($_POST['delete'])) {
             $db->delData($table, 1);
         }
-        $list = $db->getData($table);
+        $list = $db->getData($table, $fields, implode(" ", [$where, $order_by]) );
         echo json_encode($list, JSON_PRETTY_PRINT);
         break;
     /* ids */
