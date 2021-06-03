@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Europe/Rome");
 require 'db.php';
 
 $request = $_GET['q'];
