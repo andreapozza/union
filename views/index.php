@@ -235,7 +235,6 @@
 
         ].forEach(el => {
             fetch(el.tableName).then(response=>response.json()).then(data=>{
-                console.log(data)
                 var list = []
                 try {
                     list = [...data]

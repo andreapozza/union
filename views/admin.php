@@ -77,7 +77,6 @@
         $('#modal .spinner-border').hide()
         data = JSON.parse(data) 
         data = Array.isArray(data) ? data : [data]
-        console.log(data)
         // return;
         data.forEach(el => {
           ul.append(`<li class="list-group-item"><input data-id="${el.id}" class="form-control" data-value="${el.nome}" placeholder="RIMUOVI" type="text" value="${el.nome}"></li>`)
