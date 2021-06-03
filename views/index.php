@@ -343,7 +343,7 @@
             testo += "\n" + `9) Controllo assenza manomissioni su viti e blocchi di chiusura`
             testo += "\n" + `  Prossima pulizia entro il : ${data}`
 
-            textarea.innerHTML = checked ? testo : ''
+            textarea.value = checked ? testo : ''
         }
     </script>
 </body>
